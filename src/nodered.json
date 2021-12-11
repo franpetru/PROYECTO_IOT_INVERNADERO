@@ -1,0 +1,866 @@
+[
+    {
+        "id": "04642242960dff57",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "24b0c3779e2990a4",
+        "type": "inject",
+        "z": "04642242960dff57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "Temperatura",
+        "payloadType": "date",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "57ab6f0589e417b0",
+        "type": "inject",
+        "z": "04642242960dff57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "Humedad",
+        "payloadType": "date",
+        "x": 220,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8f7d55e01b4c25c",
+        "type": "mqtt in",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "Temperatura",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e069b2ed5a80bbc1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "187225f012b1dc70"
+            ]
+        ]
+    },
+    {
+        "id": "187225f012b1dc70",
+        "type": "function",
+        "z": "04642242960dff57",
+        "name": "",
+        "func": "msg.payload\nmsg.tiempo = new Date();\nmsg.valor = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 400,
+        "wires": [
+            [
+                "97be8922e1b1685e",
+                "8ab8083d075bf65f",
+                "847304154d41651f"
+            ]
+        ]
+    },
+    {
+        "id": "847304154d41651f",
+        "type": "ui_gauge",
+        "z": "04642242960dff57",
+        "name": "",
+        "group": "ae3104fe7d6fe078",
+        "order": 2,
+        "width": 3,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperatura C",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 880,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "793ed46b52bfc883",
+        "type": "mqtt in",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "Humedad",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e069b2ed5a80bbc1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 100,
+        "y": 580,
+        "wires": [
+            [
+                "4809c6616ceb79b2"
+            ]
+        ]
+    },
+    {
+        "id": "4809c6616ceb79b2",
+        "type": "function",
+        "z": "04642242960dff57",
+        "name": "",
+        "func": "msg.payload\nmsg.tiempo = new Date();\nmsg.valor = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 580,
+        "wires": [
+            [
+                "97be8922e1b1685e",
+                "6270e7e427d21595",
+                "40c5f551d00e6764"
+            ]
+        ]
+    },
+    {
+        "id": "40c5f551d00e6764",
+        "type": "ui_gauge",
+        "z": "04642242960dff57",
+        "name": "",
+        "group": "ae3104fe7d6fe078",
+        "order": 2,
+        "width": 3,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Humedad Relativa",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#fa2500",
+            "#e6e600",
+            "#1f57ff"
+        ],
+        "seg1": "40",
+        "seg2": "80",
+        "x": 890,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "32ec0db24589f235",
+        "type": "mysql",
+        "z": "04642242960dff57",
+        "mydb": "b1e0c56d60b8d52f",
+        "name": "",
+        "x": 1020,
+        "y": 500,
+        "wires": [
+            [
+                "c1b61f77d874735d"
+            ]
+        ]
+    },
+    {
+        "id": "c1b61f77d874735d",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "97be8922e1b1685e",
+        "type": "template",
+        "z": "04642242960dff57",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "INSERT INTO mediciones (medición,valor) VALUES ('{{topic}}', {{payload}} );\n",
+        "output": "str",
+        "x": 820,
+        "y": 500,
+        "wires": [
+            [
+                "32ec0db24589f235"
+            ]
+        ]
+    },
+    {
+        "id": "cb21ee8da9ce1470",
+        "type": "aedes broker",
+        "z": "04642242960dff57",
+        "name": "local",
+        "mqtt_port": 1883,
+        "mqtt_ws_bind": "port",
+        "mqtt_ws_port": "",
+        "mqtt_ws_path": "",
+        "cert": "",
+        "key": "",
+        "certname": "",
+        "keyname": "",
+        "dburl": "",
+        "usetls": false,
+        "x": 110,
+        "y": 340,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "5d1e1995c635d9bc",
+        "type": "inject",
+        "z": "04642242960dff57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "40",
+        "payloadType": "num",
+        "x": 130,
+        "y": 1080,
+        "wires": [
+            [
+                "1a7021dbc65e1463"
+            ]
+        ]
+    },
+    {
+        "id": "1a7021dbc65e1463",
+        "type": "mqtt out",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "Temperatura",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e069b2ed5a80bbc1",
+        "x": 360,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "1624c7cc21714ddf",
+        "type": "mqtt out",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "Humedad",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e069b2ed5a80bbc1",
+        "x": 370,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "0a112e501eca6b7c",
+        "type": "inject",
+        "z": "04642242960dff57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "97",
+        "payloadType": "num",
+        "x": 120,
+        "y": 1160,
+        "wires": [
+            [
+                "1624c7cc21714ddf"
+            ]
+        ]
+    },
+    {
+        "id": "6270e7e427d21595",
+        "type": "switch",
+        "z": "04642242960dff57",
+        "name": "Condicional de encendido de Riego",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "set_humedad",
+                "vt": "global"
+            },
+            {
+                "t": "gt",
+                "v": "set_humedad",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 680,
+        "y": 740,
+        "wires": [
+            [
+                "f4f8966c1d324a5d"
+            ],
+            [
+                "d1c881c8e1ee94f4"
+            ]
+        ]
+    },
+    {
+        "id": "8ab8083d075bf65f",
+        "type": "switch",
+        "z": "04642242960dff57",
+        "name": "Condicional de encendido de ventilacion",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "set_temperatura",
+                "vt": "global"
+            },
+            {
+                "t": "lt",
+                "v": "set_temperatura",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 700,
+        "y": 260,
+        "wires": [
+            [
+                "798dede17d884820"
+            ],
+            [
+                "81b5e4bcb8ff530f"
+            ]
+        ]
+    },
+    {
+        "id": "e8faaf451efc54a6",
+        "type": "ui_numeric",
+        "z": "04642242960dff57",
+        "name": "Temperatura",
+        "label": "Temperatura",
+        "tooltip": "",
+        "group": "ae3104fe7d6fe078",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "set_temperatura",
+        "topicType": "global",
+        "format": "{{value}}",
+        "min": "-10",
+        "max": "50",
+        "step": 1,
+        "x": 130,
+        "y": 840,
+        "wires": [
+            [
+                "4a1e0db38750b7c1"
+            ]
+        ]
+    },
+    {
+        "id": "19c88eab0c3a463b",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "4a1e0db38750b7c1",
+        "type": "change",
+        "z": "04642242960dff57",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "set_temperatura",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 840,
+        "wires": [
+            [
+                "19c88eab0c3a463b"
+            ]
+        ]
+    },
+    {
+        "id": "77ea2f6f7ec59f26",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9fdda7383c9da0fc",
+        "type": "mqtt out",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "Ventilacion",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e069b2ed5a80bbc1",
+        "x": 1270,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "798dede17d884820",
+        "type": "change",
+        "z": "04642242960dff57",
+        "name": "Encender Ventilacion",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 220,
+        "wires": [
+            [
+                "9fdda7383c9da0fc",
+                "77ea2f6f7ec59f26"
+            ]
+        ]
+    },
+    {
+        "id": "ba339ca3c54b68ea",
+        "type": "ui_numeric",
+        "z": "04642242960dff57",
+        "name": "Humedad",
+        "label": "Humedad",
+        "tooltip": "",
+        "group": "ae3104fe7d6fe078",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "set_humedad",
+        "topicType": "global",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "step": 1,
+        "x": 120,
+        "y": 940,
+        "wires": [
+            [
+                "77659250d3609f58"
+            ]
+        ]
+    },
+    {
+        "id": "c72351abae5f3976",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "77659250d3609f58",
+        "type": "change",
+        "z": "04642242960dff57",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "set_humedad",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 940,
+        "wires": [
+            [
+                "c72351abae5f3976"
+            ]
+        ]
+    },
+    {
+        "id": "f4f8966c1d324a5d",
+        "type": "change",
+        "z": "04642242960dff57",
+        "name": "Encender Riego",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 700,
+        "wires": [
+            [
+                "bade1b5bc2e35a36"
+            ]
+        ]
+    },
+    {
+        "id": "bade1b5bc2e35a36",
+        "type": "mqtt out",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "Riego",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e069b2ed5a80bbc1",
+        "x": 1250,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "7ae17308d7c3bd9c",
+        "type": "mqtt in",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "On_Riego",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e069b2ed5a80bbc1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 910,
+        "y": 1080,
+        "wires": [
+            [
+                "aa98a15da1a1e487"
+            ]
+        ]
+    },
+    {
+        "id": "d5d7a777a8c1ab68",
+        "type": "mqtt in",
+        "z": "04642242960dff57",
+        "name": "",
+        "topic": "On_Ventilacion",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e069b2ed5a80bbc1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 930,
+        "y": 1160,
+        "wires": [
+            [
+                "35648f2cd60393a3"
+            ]
+        ]
+    },
+    {
+        "id": "aa98a15da1a1e487",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "35648f2cd60393a3",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "81b5e4bcb8ff530f",
+        "type": "change",
+        "z": "04642242960dff57",
+        "name": "Apagar Ventilacion",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 280,
+        "wires": [
+            [
+                "9fdda7383c9da0fc",
+                "aa71c13fc3a141ef"
+            ]
+        ]
+    },
+    {
+        "id": "aa71c13fc3a141ef",
+        "type": "debug",
+        "z": "04642242960dff57",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d1c881c8e1ee94f4",
+        "type": "change",
+        "z": "04642242960dff57",
+        "name": "Apagar Riego",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 760,
+        "wires": [
+            [
+                "bade1b5bc2e35a36"
+            ]
+        ]
+    },
+    {
+        "id": "e069b2ed5a80bbc1",
+        "type": "mqtt-broker",
+        "name": "Broker Local",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ae3104fe7d6fe078",
+        "type": "ui_group",
+        "name": "Curso IoT",
+        "tab": "ebd1faf637ed147d",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false
+    },
+    {
+        "id": "b1e0c56d60b8d52f",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "DIPLOIOT_DB",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "ebd1faf637ed147d",
+        "type": "ui_tab",
+        "name": "IOT",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
